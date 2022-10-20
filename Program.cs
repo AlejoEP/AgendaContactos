@@ -29,11 +29,11 @@ namespace AgendaContactos
 
             misContactos.buscarContacto(apellido);
 
-            //Console.WriteLine("Para borrar un contacto ingrese su nombre");
-            //string nombre = Console.ReadLine();
-            //misContactos.borrarContacto(nombre);
-            //
-            //misContactos.mostrarContactos();            
+            Console.WriteLine("Para borrar un contacto ingrese su nombre");
+            string nombre = Console.ReadLine();
+            misContactos.borrarContacto(nombre);
+            
+            misContactos.mostrarContactos();            
 
         }
     }
@@ -117,15 +117,23 @@ namespace AgendaContactos
             }
         }
         //metodo para eliminar un contacto
-        //public void borrarContacto(string nombre)
-        //{
-        //    for (int i = 0; i < lista_contactos.Count; i++)
-        //    {
-        //        Contacto 
-        //        if ()
-        //        
-        //    }
-        //}
+        public void borrarContacto(string nombre)
+        {
+            ArrayList nuevalist = new ArrayList();
+            foreach (Contacto contacto in lista_contactos)
+            {
+                if (contacto.Nombre.ToLower() != nombre.ToLower())
+                {
+                    nuevalist.Add(contacto);
+                }
+            }
+            foreach (Contacto contacto in nuevalist)
+            {
+                Console.WriteLine($"{contacto.Nombre} {contacto.Apellido} {contacto.Telefono}xxxxxxxxxxxxxxxxx");
+            }
+            lista_contactos = nuevalist;
+            
+        }
     }
         
 }
