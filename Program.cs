@@ -1,5 +1,4 @@
 ﻿using System.Collections;
-using System.Collections.Generic;
 namespace AgendaContactos
 {
     internal class Program
@@ -7,7 +6,7 @@ namespace AgendaContactos
         static void Main(string[] args)
         {            
             //declaro e instancio la clase Contacto
-            Contacto javier = new Contacto("JAvier", "Perez", "15-4432-5543");
+            Contacto javier = new Contacto("Javier", "Perez", "15-4432-5543");
             Contacto flavia = new Contacto("Flavia", "Diaz", "15-9922-0023");
             Contacto pablo = new Contacto("Pablo", "Solario", "15-3321-4532");
             Contacto angel = new Contacto("Angel","Fernandez", "15-2311-0098");
@@ -33,7 +32,12 @@ namespace AgendaContactos
             string nombre = Console.ReadLine();
             misContactos.borrarContacto(nombre);
             
-            misContactos.mostrarContactos();            
+            misContactos.mostrarContactos();
+
+            Console.WriteLine("\nIngrese el apellido del contacto que desea editar: ");
+            apellido = Console.ReadLine();
+            misContactos.editarContacto(apellido);
+            misContactos.mostrarContactos();
 
         }
     }
@@ -119,20 +123,40 @@ namespace AgendaContactos
         //metodo para eliminar un contacto
         public void borrarContacto(string nombre)
         {
-            ArrayList nuevalist = new ArrayList();
+            ArrayList nueva_lista = new ArrayList();
             foreach (Contacto contacto in lista_contactos)
             {
                 if (contacto.Nombre.ToLower() != nombre.ToLower())
                 {
-                    nuevalist.Add(contacto);
+                    nueva_lista.Add(contacto);
                 }
             }
-            foreach (Contacto contacto in nuevalist)
-            {
-                Console.WriteLine($"{contacto.Nombre} {contacto.Apellido} {contacto.Telefono}xxxxxxxxxxxxxxxxx");
-            }
-            lista_contactos = nuevalist;
             
+            lista_contactos = nueva_lista;            
+        }
+        //metodo para editar contacto
+        public void editarContacto(string apellido)
+        {
+            ArrayList lista_editada = new ArrayList();
+            foreach (Contacto contacto in lista_contactos)
+            {
+                if (contacto.Apellido == apellido)
+                {
+                    Console.WriteLine("Ingrese nombre:");
+                    contacto.Nombre = Console.ReadLine();
+                    Console.WriteLine("Ingrese apellido:");
+                    contacto.Apellido = Console.ReadLine();
+                    Console.WriteLine("Ingrese celular:");
+                    contacto.Telefono = Console.ReadLine();
+                    lista_editada.Add(contacto);
+                }
+                else
+                {
+                    lista_editada.Add(contacto);
+                }
+                lista_contactos = lista_editada;
+
+            }
         }
     }
         
