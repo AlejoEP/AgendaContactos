@@ -1,4 +1,5 @@
 ﻿using System.Collections;
+using System.Collections.Generic;
 namespace AgendaContactos
 {
     internal class Program
@@ -12,7 +13,7 @@ namespace AgendaContactos
             Contacto angel = new Contacto("Angel","Fernandez", "15-2311-0098");
             Contacto ana = new Contacto("Ana Maria", "Diaz", "15-4328-8556");
             
-            //declaro clase agenda
+            //declaro clase agenda y la instancio
             Agenda misContactos = new Agenda();
             
             misContactos.agregarContacto(javier);
@@ -23,10 +24,16 @@ namespace AgendaContactos
 
             misContactos.mostrarContactos();
 
-            Console.WriteLine("Ingrese el apellido del contacto que busca: ");
+            Console.WriteLine("\nIngrese el apellido del contacto que busca: ");
             string apellido = Console.ReadLine();
 
-            misContactos.buscarContacto(apellido);            
+            misContactos.buscarContacto(apellido);
+
+            Console.WriteLine("Para borrar un contacto ingrese su nombre");
+            string nombre = Console.ReadLine();
+            misContactos.borrarContacto(nombre);
+            
+            misContactos.mostrarContactos();            
 
         }
     }
@@ -104,10 +111,28 @@ namespace AgendaContactos
             {
                 if (contacto.Apellido.ToUpper() == apellido.ToUpper())
                 {
-                    Console.WriteLine($"{contacto.Nombre} {contacto.Apellido}----------{contacto.Telefono}");
+                    Console.WriteLine($"\nNombre: {contacto.Nombre}\nApellido: {contacto.Apellido}\nCelular: {contacto.Telefono}\n");
                 }
 
             }
+        }
+        //metodo para eliminar un contacto
+        public void borrarContacto(string nombre)
+        {
+            ArrayList nuevalist = new ArrayList();
+            foreach (Contacto contacto in lista_contactos)
+            {
+                if (contacto.Nombre.ToLower() != nombre.ToLower())
+                {
+                    nuevalist.Add(contacto);
+                }
+            }
+            foreach (Contacto contacto in nuevalist)
+            {
+                Console.WriteLine($"{contacto.Nombre} {contacto.Apellido} {contacto.Telefono}xxxxxxxxxxxxxxxxx");
+            }
+            lista_contactos = nuevalist;
+            
         }
     }
         
